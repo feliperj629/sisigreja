@@ -1,0 +1,20 @@
+[15-Dec-2014 22:13:03 UTC] PHP Warning:  mysql_connect(): Unknown MySQL server host 'mysql.hostinger.com.br' (2) in /home/felipeal/public_html/chamaviva/sistema/classes/banco.class.php on line 24
+[15-Dec-2014 22:13:03 UTC] PHP Warning:  mysql_select_db() expects parameter 2 to be resource, boolean given in /home/felipeal/public_html/chamaviva/sistema/classes/banco.class.php on line 25
+[15-Dec-2014 22:13:03 UTC] PHP Warning:  mysql_query(): Access denied for user 'root'@'localhost' (using password: NO) in /home/felipeal/public_html/chamaviva/sistema/login.php on line 43
+[15-Dec-2014 22:13:03 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/felipeal/public_html/chamaviva/sistema/login.php on line 43
+[15-Dec-2014 22:13:03 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/felipeal/public_html/chamaviva/sistema/login.php on line 45
+[15-Dec-2014 22:13:15 UTC] PHP Warning:  mysql_connect(): Unknown MySQL server host 'mysql.hostinger.com.br' (2) in /home/felipeal/public_html/chamaviva/sistema/classes/banco.class.php on line 24
+[15-Dec-2014 22:13:15 UTC] PHP Warning:  mysql_select_db() expects parameter 2 to be resource, boolean given in /home/felipeal/public_html/chamaviva/sistema/classes/banco.class.php on line 25
+[15-Dec-2014 22:13:15 UTC] PHP Warning:  mysql_query(): Access denied for user 'root'@'localhost' (using password: NO) in /home/felipeal/public_html/chamaviva/sistema/login.php on line 43
+[15-Dec-2014 22:13:15 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/felipeal/public_html/chamaviva/sistema/login.php on line 43
+[15-Dec-2014 22:13:15 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/felipeal/public_html/chamaviva/sistema/login.php on line 45
+[17-Dec-2014 19:38:23 UTC] PHP Warning:  mysql_connect(): Unknown MySQL server host 'mysql.hostinger.com.br' (2) in /home/felipeal/public_html/chamaviva/sistema/classes/banco.class.php on line 24
+[17-Dec-2014 19:38:23 UTC] PHP Warning:  mysql_select_db() expects parameter 2 to be resource, boolean given in /home/felipeal/public_html/chamaviva/sistema/classes/banco.class.php on line 25
+[17-Dec-2014 19:42:18 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;felipealvesdeoliveira.com.br&quot; and accepting
+	TCP/IP connections on port felipeal_felipe? in /home/felipeal/public_html/chamaviva/sistema/classes/banco.class.php on line 24
+[17-Dec-2014 19:42:18 UTC] PHP Fatal error:  Call to undefined function pg_select_db() in /home/felipeal/public_html/chamaviva/sistema/classes/banco.class.php on line 25
+[17-Dec-2014 19:43:31 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;177.85.103.104&quot; and accepting
+	TCP/IP connections on port felipeal_felipe? in /home/felipeal/public_html/chamaviva/sistema/classes/banco.class.php on line 24
+[17-Dec-2014 19:43:31 UTC] PHP Fatal error:  Call to undefined function pg_select_db() in /home/felipeal/public_html/chamaviva/sistema/classes/banco.class.php on line 25

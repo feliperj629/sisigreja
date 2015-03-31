@@ -1,0 +1,148 @@
+<?php
+session_start();
+
+
+require("../include/seguranca.php");
+
+if (empty($_SESSION['id'])) {
+
+  header("Location: ../erro.php");
+}
+
+if(!empty($_POST)){
+
+	include '../include/gravar.php';
+
+	//print"<pre>";
+	//print_r($_POST);
+	//print"</pre>";
+	
+	}
+	
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>...DEUS V 0.1....</title>
+
+<!-- Bootstrap Core CSS -->
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="../css/sb-admin.css" rel="stylesheet">
+
+<!-- Morris Charts CSS -->
+<link href="../css/plugins/morris.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+
+<div class="container">
+
+<!-- Topo e barra lateral -->
+<?php require("topo.php"); ?>
+
+
+
+	<div class="intro-header">
+		<div class="container">
+		  <h2> <span class="glyphicon glyphicon-usd"></span><small></small></h2>
+		</div>
+	</div>	
+    <!-- Contact with Map - START -->
+    <div class="container">
+      <div class="row">
+	    <div class="col-md-12">
+		
+			<!-- Botoes de Cima-->
+		<div class="well well-sm">
+			<form name="frm" id="frm" method="post">
+			<div class="panel-heading"> 
+              <div class="btn-group"> 
+                <button type="button" class="btn btn-default" onClick="inicio()"> 
+                <span class="glyphicon glyphicon-home"></span> Inicio</button>
+               
+                
+              <div class="btn-group"> 
+                <button type="button" class="btn btn-default" onClick="voltar();"> 
+                <span class="glyphicon glyphicon-chevron-left"></span> Voltar</button>
+              </div>
+            </div>
+			</form>
+		</div>
+			<!-- FIM ---------- Botoes de Cima-->
+          </div>  
+
+<!-- /Corpo do Site -->
+<?php require("lista.php"); ?>
+
+<!-- jQuery Version 1.11.0 --> 
+	</div>
+	</div>
+	</div>
+</div>
+<!-- Bootstrap Core JavaScript --> 
+<script src="../js/bootstrap.min.js"></script> 
+<script type="text/javascript" charset="utf-8">
+	function novo()
+	{
+		window.location.href = 'cadastro.php';
+	}
+	function voltar()
+	{
+		window.location.href = 'conscadastro.php';
+	}
+	function inicio()
+	{
+		window.location.href = 'index.php';
+	}
+	
+	function salvarSaida()
+	{
+		window.location.href = 'exec.tesouraria.php';
+	}
+	
+	function salvarSaida()
+	{
+		window.location.href = 'exec.tesouraria.php';
+	}
+	
+	
+	function showExcluir()
+			{
+				$('#myModal').modal({
+  					keyboard: true
+				})
+			}
+			function excluir()
+			{
+				$('#myModal').modal('hide');
+				document.getElementById('frm').action='exec.tesouraria.php?op=EE';
+    			document.getElementById('frm').submit();
+			}	
+			
+			
+</script> 
+<!-- Morris Charts JavaScript --> 
+<script src="../js/plugins/morris/raphael.min.js"></script> 
+<script src="../js/plugins/morris/morris.min.js"></script> 
+<script src="../js/plugins/morris/morris-data.js"></script>
+</body>
+</html>

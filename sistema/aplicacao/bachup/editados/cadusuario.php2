@@ -1,0 +1,306 @@
+<?php session_start();
+
+//error_reporting(E_ALL);
+//ini_set('display_errors','1');
+
+require("../include/seguranca.php"); 
+require_once('../classes/usuario.class.php');
+require_once('../classes/banco.class.php');
+
+
+	$clConexao = new MeuBanco;
+	$conn = $clConexao->conecta();
+
+	$usuario = new Usuario;
+	$usuario->banco;
+	
+	$id_user = $_SESSION['id_usuario'];
+	$op = $_REQUEST['op'];
+	
+	if (!empty($id_user))
+   {
+       $usuario->getById($id);
+	    
+	   $id_usuario = $usuario->id_usuario;
+	   $nome_usuario = $usuario->nome_usuario;
+	   $login = $usuario->login;
+	   $senha = $usuario->senha;
+	   $telefone = $usuario->telefone;
+	   $celular = $usuario->celular;
+	   $email = $usuario->email;
+	   $id_tipo_acesso = $usuario->id_tipo_acesso;
+			
+	}	
+
+//print_r ($_SESSION);
+
+//$id_usuario = $_SESSION['id_usuario'];
+//$sql = "SELECT * FROM `tb_usuario` WHERE  id_usuario = '$id_usuario'";
+
+
+
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
+
+	<title>Chama Viva - Usuario Sistema</title>
+
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="../css/sb-admin.css" rel="stylesheet">
+
+<!-- Morris Charts CSS -->
+<link href="../css/plugins/morris.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="../font-awesome-4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+
+
+
+</head>
+
+<body>
+
+<div id="page-wrapper">
+
+    <?php //require("topo.php");?>
+	
+	
+	<div id="myModal" class="modal fade">
+			
+		  <div class="modal-dialog"> 
+			<div class="modal-content"> 
+			  <!-- dialog body -->
+			  <div class="modal-body"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				Excluir o(s) registro(s)? </div>
+			  <!-- dialog buttons -->
+			  <div class="modal-footer"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+				<button type="button" class="btn btn-danger" onClick="excluir()">Excluir</button>
+			  </div>
+			</div>
+		  </div>
+		  
+	</div>
+	
+<div class="panel panel-default "> 
+<div class="row">
+                    <div class="col-lg-12">
+                        <h2 class="page-header">
+                           <span class="glyphicon glyphicon-user"></span> Dados do Usuario <small></small>
+                        </h2>
+                    </div>
+                </div>
+	<!-- Contact with Map - START -->
+    <div class="container">
+      <div class="row">
+	    <div class="col-md-12">
+		
+			<!-- Botoes de Cima-->
+		<div class="well well-sm">
+			<form name="frm" id="frm" method="post">
+			<div class="panel-heading"> 
+              <div class="btn-group"> 
+                <button type="button" class="btn btn-default" onClick="salvarSaida()"> 
+                <span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+				
+				<!--
+				<button type="button" class="btn btn-default" onClick="inicio()"> 
+                <span class="glyphicon glyphicon-home"></span> Inicio</button>
+               
+                <button type="button" class="btn btn-default" onClick="showExcluir()"> 
+                <span class="glyphicon glyphicon-minus"></span> Excluir</button>
+				
+				<button type="button" class="btn btn-default" onClick="voltar();"> 
+                <span class="glyphicon glyphicon-chevron-left"></span> Voltar</button>
+				-->
+              </div>
+       			
+            </div>
+			
+			</form>	
+				
+		</div>
+		
+			<!-- FIM ---------- Botoes de Cima-->
+            
+<form role="form" name="frm2" id="frm2"  method="post" action="exec.usuario.php">
+	<input type="hidden" name="op" id="op" value="<?php echo $op;?>">
+    <input type="hidden" name="fechar" id="fechar" value="">
+    <div class="col-md-12">
+		   
+			<div class="row">
+
+               
+  <div class="form-group">
+   <div class="row"> 
+   
+
+   
+    <div class="col-lg-4"> 	   
+    <label class="ccontrol-label">Nome:</label>
+	
+      <input type="text" class="form-control" id="edtnome" name="edtnome"  value="<?php print $nome_usuario; ?>"  >
+    </div>
+ <div class="col-lg-4"> 	   
+    <label  class=" control-label">Email:</label>
+    
+      <input type="email" class="form-control"  id="edtemail" name="edtemail" value="<?php  print $email; ?>"   >
+    </div>
+	</div>
+  </div>
+   <div class="form-group">
+      <div class="row"> 
+	  
+   <div class="col-lg-4"> 	   
+    <label  class=" control-label">Telefone:</label>
+ 
+                    <input id="edttelefone" name="edttelefone" type="text"  class="form-control" onKeyPress="MascaraTelefone(form.tel);" maxlength="14"  onBlur="ValidaTelefone(form.tel);" value="<?php echo $telefone;?>">    </div>
+  <div class="col-lg-4"> 	   
+    <label  class=" control-label">Celular:</label>
+     <input id="edtcelular" name="edtcelular" type="text"  class="form-control" onKeyPress="MascaraTelefone(form.cel);" maxlength="14"  onBlur="ValidaTelefone(form.cel);" value="<?php echo $celular;?>">    </div>
+ 
+    </div>
+	</div>
+  </div>
+     
+     <div class="form-group">
+	   <div class="row">
+	   
+	   <div class="col-lg-4"> 
+    <label  class=" control-label">Login:</label>
+   
+     <input type="text" class="form-control" id="edtlogin" name="edtlogin" value="<?php  print $login; ?>"  >
+    </div>
+  <div class="col-lg-4"> 
+    <label  class=" control-label">Senha Atual:</label>
+   
+      <input type="password" class="form-control" id="edtsenhaatual"  name="edtsenhaatual" value="<?php // print $senha; ?>">
+    </div>
+	<div class="col-lg-4"> 
+    <label  class=" control-label">Nova Senha:</label>
+   
+      <input type="password" class="form-control" id="edtsenhanova"  name="edtsenhanova" value="<?php // print $senha; ?>">
+    </div>
+  </div>
+  </div>		
+</div>
+</form>
+</div>
+</div>
+</div>
+	
+  
+  </div>
+</div>
+
+
+<!-- jQuery Version 1.11.0 --> 
+<script src="../js/jquery-1.11.0.js"></script> 
+
+<script type="text/javascript" charset="utf-8">
+function validaForm()
+	{
+	   r = true;
+	   m = '';
+/*	   if (document.getElementById('op').value=='I')
+	   {
+	   		if ((document.getElementById('edtnumero').value == '') ||
+	       		(document.getElementById('edtdescricao').value == '') 
+		   		)
+	   		{ 
+	      		r = false;
+		  		m = 'Verifique o preenchimento dos campos. \r\n';
+	   		}
+		}
+		else
+		{
+	   		if ((document.getElementById('edtnumero').value == '') 
+		   		)
+	   		{ 
+	      		r = false;
+		  		m = 'Verifique o preenchimento dos campos. \r\n';
+	   		}
+		}
+*/
+	   if (r == false){
+	   	   alert(m);
+		   return false;
+	   }
+	   else
+	   {
+	      return true;
+	   }
+	}
+	
+		function emitirRelatorio(codigo)
+		{
+			if (codigo == 1)
+			{
+				document.forms[0].action='relentrada.php';
+				document.forms[0].target="_blank";
+				document.forms[0].submit();
+			}
+			
+		}
+	function novo()
+	{
+		window.location.href = 'cadusuario.php?op=I';
+	}
+	function voltar()
+	{
+		window.location.href = 'index.php';
+	}
+	function inicio()
+	{
+		window.location.href = 'index.php';
+	}
+	
+	function salvarSaida()
+	{
+		//window.location.href = 'exec.usuario.php?op=A';
+		document.getElementById('frm2').submit();		
+		document.getElementById('frm2').action='exec.usuario.php?op=A';
+	}
+	
+	
+	function salvarFechar()
+	{
+	   if (validaForm()==true){
+    	   $('#myModal').modal('hide');
+				document.getElementById('fechar').value='s';
+				document.getElementById('frm').submit();
+				document.getElementById('frm').action='exec.usuario.php?op=A';
+	   }
+	   window.location.href = 'exec.usuario.php?op=A';
+	}
+	
+	
+	
+	
+	function showExcluir()
+			{
+				$('#myModal').modal({
+  					keyboard: true
+				})
+			}
+			function excluir()
+			{
+				$('#myModal').modal('hide');
+				document.getElementById('frm').action='exec.usuario.php?op=EE';
+    			document.getElementById('frm').submit();
+			}	
+			
+			
+</script> 
+
+
+</body>
+</html>

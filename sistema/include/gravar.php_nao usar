@@ -1,0 +1,89 @@
+<?php 
+
+require_once('../classes/banco.class.php');
+
+$banco = new MeuBanco;
+$banco->conecta();
+ 
+// RECEBENDO OS DADOS PREENCHIDOS DO FORMULÁRIO !
+$nome	= $_POST ["nome"];	
+$data_nas	= $_POST ["data_nas"];
+$id_sexo	= $_POST ["id_sexo"];	
+$id_estado_civil	= $_POST ["id_estado_civil"];	
+$id_escolaridade	= $_POST ["id_escolaridade"];	
+$cpf	= $_POST ["cpf"];	
+$rg	= $_POST ["rg"];	
+$origem = $_POST ["origem"];
+$id_cargo	= $_POST ["id_cargo"];		
+$id_igreja = $_POST ["id_igreja"];
+$data_bat	= $_POST ["data_bat"];
+$data_bat_esp	= $_POST ["data_bat_esp"];
+$nascionalidade	= $_POST ["nascionalidade"];
+$naturalidade	= $_POST ["naturalidade"];
+$profissao	= $_POST ["profissao"];
+$telefone	= $_POST ["telefone"];
+$celular	= $_POST ["celular"];
+$email	= $_POST ["email"];
+$rua	= $_POST ["rua"];	
+$numero	= $_POST ["numero"];
+$bairro	= $_POST ["bairro"];	
+$cidade	= $_POST ["cidade"];
+$cep	= $_POST ["cep"];
+$uf	= $_POST ["uf"];
+$complemento	= $_POST ["complemento"];
+$nome_pai	= $_POST ["nome_pai"];
+$nome_mae	= $_POST ["nome_mae"];
+$conjuge	= $_POST ["conjuge"];
+$n_filhos	= $_POST ["n_filhos"];
+$id_recebimento	= $_POST ["id_recebimento"];
+$data_rec	= $_POST ["data_rec"];
+$igreja_ant	= $_POST ["igreja_ant"];
+$id_cargo_ant = $_POST["id_cargo_ant"];
+$tempo_cargo	= $_POST ["tempo_cargo"];
+$obs	= $_POST ["obs"];
+$criado_por = $_SESSION['id'];
+
+$query = "
+	INSERT INTO tb_pessoa ( nome , data_nas , id_sexo , id_estado_civil , id_escolaridade , cpf , rg , origem,
+ id_cargo, id_igreja , data_bat , data_bat_esp , nascionalidade, naturalidade, profissao ,
+ telefone , celular , email , rua , numero , bairro , cidade , cep , uf , complemento , nome_pai ,
+ nome_mae , conjuge , n_filhos , id_recebimento , data_rec , igreja_ant , id_cargo_ant , tempo_cargo , obs , 
+ criado_por, data_criacao ) 
+VALUES ('$nome', '$data_nas', '$id_sexo', '$id_estado_civil', '$id_escolaridade', '$cpf', '$rg', '$origem',
+ '$id_cargo', '$id_igreja' , '$data_bat' , '$data_bat_esp' , '$nascionalidade' , '$naturalidade' , '$profissao' ,
+ '$telefone', '$celular' , '$email', '$rua', '$numero', '$bairro', '$cidade', '$cep', '$uf', '$complemento', '$nome_pai',
+ '$nome_mae', '$conjuge', '$n_filhos', '$id_recebimento', '$data_rec', '$igreja_ant', '$id_cargo_ant', '$tempo_cargo', '$obs',
+ '$criado_por', now())
+ ";
+
+//print $query;	
+
+$search = mysql_query("SELECT * FROM tb_pessoa WHERE cpf = '$cpf'");
+	
+	if(@mysql_num_rows($search) > 0){
+
+		?>
+	<div class="alert alert-warning alert-dismissible" role="alert">
+	  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	  <strong>Esse CPF j&aacute; existe!</strong> Verificar usuarios cadastrados e escolher a op&ccedil;&atilde;o de editar.
+	</div>
+
+		<?php
+	}else{ 	
+	
+// faz inserção
+		if (mysql_query($query)){
+ 
+?>
+	<div class="alert alert-warning alert-dismissible" role="alert">
+	  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	  <strong>Seu cadastro foi realizado com sucesso!</strong> Agradecemos a atenção.
+	</div>
+
+		<?php
+}
+
+
+}
+
+?>
