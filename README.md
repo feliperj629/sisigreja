@@ -1,4 +1,2 @@
-# sisigreja
-Site e sistema de Gerencia de Igreja
-
-teste criação Readme
+# SisIgreja
+Site e sistema para o gerenciamento de igrejas.
